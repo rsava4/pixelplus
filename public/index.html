@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расчет</title>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <div class="row justify-content-center mt-2">
+            <div class="col-4">
+				<div class="card">
+					<div class="card-body">
+						<div class="form-group">
+							<label for="period">Период</label>
+							<input type="text" class="form-control" value="2" name="period" id="period">
+		
+						</div>
+						<div class="form-group">
+							<button class="btn btn-primary">Вывести данные</button>
+						</div>
+					</div>
+				  </div>
+               
+            </div>
+        </div>
+		
+		<div class="row mt-4">
+			<div class="col-4 daily">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Дата</th>
+							<th>Средняя t</th>
+							<th>Скользящая средняя за период</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+			<div class="col-4 weekly">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Дата</th>
+							<th>Средняя t</th>
+							<th>Скользящая средняя за период</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+			<div class="col-4 monthly">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Дата</th>
+							<th>Средняя t</th>
+							<th>Скользящая средняя за период</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+    </div>
+
+
+    <script>
+        $(document).ready(function(){
+            $('button').click(function(){
+                $.ajax({
+                    url: '/get_data.php',       
+                    method: 'post',             
+                    dataType: 'json',          
+                    data: {period: $('#period').val()},     
+                    success: function(data){  
+						if(data.daily) {
+							$('.daily tbody').html('');
+							$.each(data.daily, function(index, item) {
+								$('.daily tbody').append('<tr><td>' + item.date + '</td><td>' + item.average_temperature + '</td><td>' + item.moving_average + '</td></tr>');
+							});
+						}
+						if(data.weekly) {
+							$('.weekly tbody').html('');
+							$.each(data.weekly, function(index, item) {
+								$('.weekly tbody').append('<tr><td>' + item.date + '</td><td>' + item.average_temperature + '</td><td>' + item.moving_average + '</td></tr>');
+							});
+						}
+						if(data.monthly) {
+							$('.monthly tbody').html('');
+							$.each(data.monthly, function(index, item) {
+								$('.monthly tbody').append('<tr><td>' + item.date + '</td><td>' + item.average_temperature + '</td><td>' + item.moving_average + '</td></tr>');
+							});
+						}
+                       // console.log(data.daily); 
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

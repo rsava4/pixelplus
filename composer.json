@@ -1,0 +1,17 @@
+{
+    "name": "roman/pixeltools",
+    "description": "test work",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "roman",
+            "email": "rsava4@yandex.ru"
+        }
+    ],
+    "require": {}
+}
