@@ -4,7 +4,13 @@ namespace App;
 final class CalculateMovingAverage
 {
 
-    public static function run($data, $period=2)
+	/**
+	 * Summary of run
+	 * @param mixed $data
+	 * @param int $period
+	 * @return array
+	 */
+    public static function run($data, int $period=2)
     {
         $index = 1;
         foreach($data as $key=>$value) {

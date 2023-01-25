@@ -11,6 +11,11 @@ class AverageTemperatureCollection
 
 	private $data = [];
 
+	/**
+	 * Summary of addItemFromArray
+	 * @param array $row
+	 * @return void
+	 */
 	public function addItemFromArray(array $row)
 	{
 		$date = new DateTimeImmutable($row['date']);
@@ -23,11 +28,19 @@ class AverageTemperatureCollection
 		ksort($this->data);
 	}
 
+	/**
+	 * Summary of toDaily
+	 * @return array<AverageTemperature>
+	 */
 	public function toDaily()
     {
         return $this->data;
     }
 	
+	/**
+	 * Summary of toWeekly
+	 * @return array<AverageTemperature>
+	 */
     public function toWeekly()
     {
         $result = [];
@@ -47,6 +60,10 @@ class AverageTemperatureCollection
         return $result;
     }
 
+	/**
+	 * Summary of toMothly
+	 * @return array<AverageTemperature>
+	 */
     public function toMothly()
     {
         $result = [];

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Расчет</title>
+    <title>Расчет средней скользящей</title>
     <script src="js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
@@ -30,7 +30,8 @@
         </div>
 		
 		<div class="row mt-4">
-			<div class="col-4 daily">
+			<div class="col-4 daily d-none">
+				<h2>По дням</h2>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -42,7 +43,8 @@
 					<tbody></tbody>
 				</table>
 			</div>
-			<div class="col-4 weekly">
+			<div class="col-4 weekly d-none">
+				<h2>По неделям</h2>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -54,7 +56,8 @@
 					<tbody></tbody>
 				</table>
 			</div>
-			<div class="col-4 monthly">
+			<div class="col-4 monthly d-none">
+				<h2>По месяцам</h2>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -84,18 +87,21 @@
 							$.each(data.daily, function(index, item) {
 								$('.daily tbody').append('<tr><td>' + item.date + '</td><td>' + item.average_temperature + '</td><td>' + item.moving_average + '</td></tr>');
 							});
+							$('.daily').removeClass('d-none');
 						}
 						if(data.weekly) {
 							$('.weekly tbody').html('');
 							$.each(data.weekly, function(index, item) {
 								$('.weekly tbody').append('<tr><td>' + item.date + '</td><td>' + item.average_temperature + '</td><td>' + item.moving_average + '</td></tr>');
 							});
+							$('.weekly').removeClass('d-none');
 						}
 						if(data.monthly) {
 							$('.monthly tbody').html('');
 							$.each(data.monthly, function(index, item) {
 								$('.monthly tbody').append('<tr><td>' + item.date + '</td><td>' + item.average_temperature + '</td><td>' + item.moving_average + '</td></tr>');
 							});
+							$('.monthly').removeClass('d-none');
 						}
                        // console.log(data.daily); 
                     }
